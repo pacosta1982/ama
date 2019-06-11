@@ -11,6 +11,7 @@ use App\Parentesco;
 use App\Institucion_Cat;
 use App\Discapacidad;
 use App\Enfermedad;
+use App\Persona;
 
 class HomeController extends Controller
 {
@@ -53,12 +54,12 @@ class HomeController extends Controller
                 'password' => 'S3n4vitat'
             ];
             $client = new client();
-            $res = $client->post('http://10.1.79.7:8080/mbohape-core/sii/security', [
+            $res = $client->post('http://192.168.202.43:8080/mbohape-core/sii/security', [
                 'headers' => $headers,
                 'json' => $GetOrder,
                 'decode_content' => false
             ]);
-            //var_dump((string) $res->getBody());
+            var_dump((string) $res->getBody());
             $contents = $res->getBody()->getContents();
             $book = json_decode($contents);
             //echo $book->token;
@@ -115,11 +116,49 @@ class HomeController extends Controller
         return view('home',compact('expediente','historial'));
     }
 
-    public function store(CreatePersonaRequest $request)
+    public function store(Request $request)
     {
+
         $input = $request->all();
 
-        $persona = $this->personaRepository->create($input);
+        $persona = new Persona();
+        $persona->ci=$request->ci;
+        $persona->nombre=$request->nombre;
+
+        $persona->apellido=$request->apellido;
+        $persona->sexo=$request->sexo;
+
+        $persona->fecha_nac=$request->fecha_nac;
+        $persona->email=$request->email;
+
+        $persona->domicilio_actual=$request->domicilio_actual;
+        $persona->departamento=$request->departamento;
+
+        $persona->ciudad=$request->ciudad;
+        $persona->barrio=$request->barrio;
+
+        $persona->ingreso=$request->ingreso;
+        $persona->discapacidad=$persona->discapacidad;
+
+        $persona->ingreso=$request->ingreso;
+        $persona->discapacidad=$request->discapacidad;
+
+        $persona->ocupacion=$request->ocupacion;
+        $persona->estado_civil=$request->estado_civil;
+
+        $persona->nacionalidad=$request->nacionalidad;
+        $persona->celular=$request->celular;
+
+        $persona->embarazo=$request->embarazo;
+        $persona->gestacion=$request->gestacion;
+
+        $persona->save();
+
+        var_dump($input);
+        return "funciona";
+
+
+        /*$persona = $this->personaRepository->create($input);
 
         $addmiembro = new Persona_Parentesco();
         $addmiembro->cantidad=0;
@@ -146,7 +185,7 @@ class HomeController extends Controller
 
         Flash::success('Postulante Creado Exitosamente...');
 
-        return redirect(route('home'));
+        return redirect(route('home'));*/
     }
 
     public function csvhistorial(Request $request)

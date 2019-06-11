@@ -31,20 +31,22 @@
         </div>
     </div>
 
-    <form role="form">
+
         <div class="panel panel-primary setup-content" id="step-1">
             <div class="panel-heading">
                  <h3 class="panel-title">Postulante</h3>
             </div>
             <div class="panel-body">
                 <div class="row">
+            <form action="/formulario" method="post">
+                @csrf
                 @include('postulante')
                 </div>
                 <button class="btn btn-primary nextBtn pull-right" type="button">Siguiente</button>
             </div>
         </div>
 
-        <div class="panel panel-primary setup-content" id="step-2">
+    <!--    <div class="panel panel-primary setup-content" id="step-2">
             <div class="panel-heading">
                  <h3 class="panel-title">Miembros</h3>
             </div>
@@ -72,7 +74,8 @@
                 @include('adjuntos')
                 <button class="btn btn-success pull-right" type="submit">Enviar!</button>
             </div>
-        </div>
+        </div> -->
+        <button class="btn btn-success pull-right" type="submit">Enviar!</button>
     </form>
 </div>
 

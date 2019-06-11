@@ -19,3 +19,5 @@ Route::post('/filtros', 'HomeController@index')->name('postfiltro');
 Route::get('/filtros', 'HomeController@index')->name('getfiltro');
 
 Route::get('miembros/ajax/{cedula?}', 'HomeController@cedulamiembro');
+
+Route::post('/formulario', 'HomeController@store');

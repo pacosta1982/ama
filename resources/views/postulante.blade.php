@@ -47,7 +47,7 @@
     </div>
     <div class="form-group col-sm-3">
             <label for="">Email</label>
-            <input type="text" name="email" class="form-control" value="" >
+            <input type="text" name="email" class="form-control" placeholder="Ingrese Mail"alue="" >
     </div>
     <div class="form-group col-sm-3">
             <label for="">Telefono</label>
@@ -85,7 +85,7 @@
     </div>
     <div class="form-group col-sm-3">
             <label for="">Ingreso</label>
-            <input type="text" name="barrio" class="form-control" value="" required>
+            <input type="text" name="ingreso" class="form-control" placeholder="Ingreso Mensual" value="" required>
     </div>
     <div class="form-group col-sm-3">
             <label>Discapacidad:</label>
