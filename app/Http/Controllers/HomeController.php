@@ -110,7 +110,7 @@ class HomeController extends Controller
                         $escolaridad = Institucion_Cat::all();
                         $discapacidad = Discapacidad::all();
                         $enfermedad = Enfermedad::all();
-                        $entidades = Entidad::all();
+                        $entidades = Entidad::orderBy('name')->get();
                     return view('home',compact('nroexp','cedula','nombre','apellido','fecha','sexo',
                     'nac','est','prof','ciudad','parentesco','escolaridad','discapacidad','enfermedad','entidades'));
                 }

@@ -137,7 +137,7 @@
                   <div class="row">
                         <div class="form-group col-sm-6">
                         <label for="">Correo</label>
-                        <input type="text" class="form-control" name="ocupacion" id="ocupacion" placeholder="Ingrese Ocupación">
+                        <input type="text" class="form-control" name="ocupacion" id="ocupacion" placeholder="Ingrese Correo">
                         </div>
                         <div class="form-group col-sm-6">
                             <label>Parentesco</label>
