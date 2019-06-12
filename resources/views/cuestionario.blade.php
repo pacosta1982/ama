@@ -240,7 +240,14 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                            <input type="text" name="q11_text" class="form-control" placeholder="Observaciones ...">
+                                            <select class="form-control required" name="q11_text" id="q11_text">
+                                                    <option value="" >Seleccione una opcion</option>
+                                                    @foreach($entidades as $ent)
+
+                                                    <option value="{{$ent->id}}"
+                                                    >{{$ent->name}} </option>
+                                                    @endforeach
+                                                </select>
                                     </div>
                                 </div>
                             </div>

@@ -12,6 +12,7 @@ use App\Institucion_Cat;
 use App\Discapacidad;
 use App\Enfermedad;
 use App\Persona;
+use App\Entidad;
 use App\Cuestionario;
 use App\Persona_Institucion;
 use App\Persona_Discapacidad;
@@ -107,8 +108,9 @@ class HomeController extends Controller
                         $escolaridad = Institucion_Cat::all();
                         $discapacidad = Discapacidad::all();
                         $enfermedad = Enfermedad::all();
+                        $entidades = Entidad::all();
                     return view('home',compact('nroexp','cedula','nombre','apellido','fecha','sexo',
-                    'nac','est','prof','ciudad','parentesco','escolaridad','discapacidad','enfermedad'));
+                    'nac','est','prof','ciudad','parentesco','escolaridad','discapacidad','enfermedad','entidades'));
                 }
 
                 //$nombre = $datos->nombres;
@@ -201,11 +203,11 @@ class HomeController extends Controller
         $enfermedad->persona_id=$persona->id;
         $enfermedad->save();
         }
-
+        $data = $request->except('_token','id');
         for ($i=4; $i < 12 ; $i++) {
             $question = new Cuestionario;
             $question->pregunta_id = $i;
-            $question->persona_id = $request->id;
+            $question->persona_id = $persona->id;
             $question->value = $data['q'.$i];
             $question->text_value = $data['q'.$i.'_text'];
             $question->save();

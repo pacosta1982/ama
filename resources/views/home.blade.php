@@ -45,13 +45,31 @@
                 <button class="btn btn-primary nextBtn pull-right" type="button">Siguiente</button>
             </div>
         </div>
-        <div class="panel panel-primary setup-content" id="step-3">
+        <div class="panel panel-primary setup-content" id="step-2">
                 <div class="panel-heading">
-                     <h3 class="panel-title">Cuestionario</h3>
+                     <h3 class="panel-title">Miembros</h3>
                 </div>
                 <div class="panel-body">
-                    @include('cuestionario')
+                    @include('miembros')
                     <button class="btn btn-primary nextBtn pull-right" type="button">Siguiente</button>
+                </div>
+            </div>
+        <div class="panel panel-primary setup-content" id="step-3">
+            <div class="panel-heading">
+                    <h3 class="panel-title">Cuestionario</h3>
+            </div>
+            <div class="panel-body">
+                @include('cuestionario')
+                <button class="btn btn-primary nextBtn pull-right" type="button">Siguiente</button>
+            </div>
+        </div>
+        <div class="panel panel-primary setup-content" id="step-4">
+                <div class="panel-heading">
+                     <h3 class="panel-title">Adjuntos</h3>
+                </div>
+                <div class="panel-body">
+                    @include('adjuntos')
+                    <button class="btn btn-success pull-right" type="submit">Enviar!</button>
                 </div>
             </div>
 
@@ -84,7 +102,7 @@
                 <button class="btn btn-success pull-right" type="submit">Enviar!</button>
             </div>
         </div> -->
-        <button class="btn btn-success pull-right" type="submit">Enviar!</button>
+
     </form>
 </div>
 
