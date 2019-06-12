@@ -85,7 +85,7 @@
     </div>
     <div class="form-group col-sm-3">
             <label for="">Ingreso</label>
-            <input type="text" name="ingreso" class="form-control" placeholder="Ingreso Mensual" value="" required>
+            <input type="text" name="ingreso" id="ingreso" class="form-control" placeholder="Ingreso Mensual" value="" required>
     </div>
     <div class="form-group col-sm-3">
             <label>Discapacidad:</label>

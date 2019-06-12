@@ -131,7 +131,7 @@
                     </div>
                     <div class="form-group col-sm-6">
                     <label for="">Telefono</label>
-                    <input type="text" class="form-control" name="ocupacion" id="ocupacion" placeholder="Ingrese Ocupación">
+                    <input type="text" class="form-control" name="ocupacion" id="ocupacion" placeholder="Ingrese Telefono">
                     </div>
                   </div>
                   <div class="row">
@@ -149,6 +149,7 @@
                                 >{{$us->name}} </option>
                                 @endforeach
                             </select>
+                            <span id="error_first_parentesco_id" class="text-danger"></span>
                         </div>
                   </div>
                   <div class="row">
@@ -271,6 +272,13 @@
 @stop
 
 @section('js')
+    <script src="{{asset('js/jquery.numeric.js')}}"></script>
+    <script type="text/javascript">
+
+    $("#nroexp").numeric({ decimal: false });
+    $("#ingreso").numeric({ decimal: false });
+
+    </script>
     <script> console.log('Hi!');
         $(".announce").click(function(){ // Click to only happen on announce links
             $('#myModal').modal('show');
@@ -333,6 +341,23 @@
             $('#error_first_institucion_id').text(error_first_institucion_id);
             $('#institucion_id').css('border-color', '');
             first_name_institucion_id = $('#institucion_id').val();
+            }
+
+
+
+            if($('#parentesco_id').val() == '')
+            {
+            error_first_parentesco_id = 'Parentesco Requerido';
+            $('#error_first_parentesco_id').text(error_first_parentesco_id);
+            $('#parentesco_id').css('border-color', '#cc0000');
+            first_name_parentesco_id = '';
+            }
+            else
+            {
+            error_first_parentesco_id = '';
+            $('#error_first_parentesco_id').text(error_first_parentesco_id);
+            $('#parentesco_id').css('border-color', '');
+            first_name_parentesco_id = $('#parentesco_id').val();
             }
 
             if($('#ingreso').val() == '')
