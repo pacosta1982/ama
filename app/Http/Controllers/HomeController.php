@@ -12,6 +12,13 @@ use App\Institucion_Cat;
 use App\Discapacidad;
 use App\Enfermedad;
 use App\Persona;
+use App\Cuestionario;
+use App\Persona_Institucion;
+use App\Persona_Discapacidad;
+use App\PersonaEnfermedad;
+use App\Persona_Parentesco;
+use Session;
+//use App\Persona;
 
 class HomeController extends Controller
 {
@@ -33,6 +40,11 @@ class HomeController extends Controller
     {
 
         if ($request->input('NroExp')) {
+            $existe = Persona::where('ci',$request->input('NroExp'))->get();
+            if($existe->count() >= 1){
+                Session::flash('error', 'Ya existe el postulante!');
+                return redirect()->back();
+            }
 
         /*$expediente = SIG005::where('NroExp',$request->input('NroExp'))
         ->where('NroExpS','A')
@@ -54,12 +66,12 @@ class HomeController extends Controller
                 'password' => 'S3n4vitat'
             ];
             $client = new client();
-            $res = $client->post('http://192.168.202.43:8080/mbohape-core/sii/security', [
+            $res = $client->post('http://10.1.79.7:8080/mbohape-core/sii/security', [
                 'headers' => $headers,
                 'json' => $GetOrder,
                 'decode_content' => false
             ]);
-            var_dump((string) $res->getBody());
+            //var_dump((string) $res->getBody());
             $contents = $res->getBody()->getContents();
             $book = json_decode($contents);
             //echo $book->token;
@@ -121,6 +133,13 @@ class HomeController extends Controller
 
         $input = $request->all();
 
+        var_dump($input);
+        $existe = Persona::where('ci',$request->ci)->get();
+        if($existe->count() >= 1){
+            Session::flash('error', 'Ya existe el postulante!');
+            return redirect()->back();
+        }
+
         $persona = new Persona();
         $persona->ci=$request->ci;
         $persona->nombre=$request->nombre;
@@ -154,38 +173,47 @@ class HomeController extends Controller
 
         $persona->save();
 
-        var_dump($input);
-        return "funciona";
-
-
-        /*$persona = $this->personaRepository->create($input);
-
         $addmiembro = new Persona_Parentesco();
         $addmiembro->cantidad=0;
         $addmiembro->parentesco_id=1;
         $addmiembro->persona_id=$persona->id;
-        $addmiembro->postulante_id=Auth::user()->id;
+        $addmiembro->postulante_id=$persona->id;
         $addmiembro->save();
 
+        if ($request->institucion_id) {
         $addescolaridad = new Persona_Institucion();
         $addescolaridad->cantidad=0;
         $addescolaridad->institucion_id=$request->institucion_id;
         $addescolaridad->persona_id=$persona->id;
         $addescolaridad->save();
+        }
 
+        if ($request->discapacidad) {
         $discapacidad = new Persona_Discapacidad();
         $discapacidad->discapacidad_id=$request->discapacidad;
         $discapacidad->persona_id=$persona->id;
         $discapacidad->save();
+        }
 
+        if ($request->enfermedad_id) {
         $enfermedad = new PersonaEnfermedad();
         $enfermedad->enfermedad_id=$request->enfermedad_id;
         $enfermedad->persona_id=$persona->id;
         $enfermedad->save();
+        }
 
-        Flash::success('Postulante Creado Exitosamente...');
+        for ($i=4; $i < 12 ; $i++) {
+            $question = new Cuestionario;
+            $question->pregunta_id = $i;
+            $question->persona_id = $request->id;
+            $question->value = $data['q'.$i];
+            $question->text_value = $data['q'.$i.'_text'];
+            $question->save();
+        }
 
-        return redirect(route('home'));*/
+        Session::flash('message', 'Se ha inscripto Correctamente!');
+        return redirect()->route('inicio');
+
     }
 
     public function csvhistorial(Request $request)

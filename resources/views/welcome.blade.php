@@ -10,6 +10,12 @@
 
 @section('content')
 <section class="invoice">
+        @if(Session::has('message'))
+        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+        @endif
+        @if(Session::has('error'))
+        <p class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('error') }}</p>
+        @endif
     <form action="/filtros" method="post">
         @csrf
     <div class="row no-print">

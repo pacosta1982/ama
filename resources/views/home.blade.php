@@ -45,6 +45,15 @@
                 <button class="btn btn-primary nextBtn pull-right" type="button">Siguiente</button>
             </div>
         </div>
+        <div class="panel panel-primary setup-content" id="step-3">
+                <div class="panel-heading">
+                     <h3 class="panel-title">Cuestionario</h3>
+                </div>
+                <div class="panel-body">
+                    @include('cuestionario')
+                    <button class="btn btn-primary nextBtn pull-right" type="button">Siguiente</button>
+                </div>
+            </div>
 
     <!--    <div class="panel panel-primary setup-content" id="step-2">
             <div class="panel-heading">

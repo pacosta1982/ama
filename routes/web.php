@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/inicio', function () {
+    return view('welcome');
+})->name('inicio');
+
 Route::post('/filtros', 'HomeController@index')->name('postfiltro');
 Route::get('/filtros', 'HomeController@index')->name('getfiltro');
 
