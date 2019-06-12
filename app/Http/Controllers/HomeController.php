@@ -18,6 +18,7 @@ use App\Persona_Institucion;
 use App\Persona_Discapacidad;
 use App\PersonaEnfermedad;
 use App\Persona_Parentesco;
+use App\ImageGallery;
 use Session;
 //use App\Persona;
 
@@ -89,7 +90,8 @@ class HomeController extends Controller
                 $datos=$cedula->getBody()->getContents();
                 $datospersona = json_decode($datos);
                 if(isset($datospersona->obtenerPersonaPorNroCedulaResponse->return->error)){
-                    Flash::error($datospersona->obtenerPersonaPorNroCedulaResponse->return->error);
+                    //Flash::error($datospersona->obtenerPersonaPorNroCedulaResponse->return->error);
+                    Session::flash('error', $datospersona->obtenerPersonaPorNroCedulaResponse->return->error);
                     return redirect()->back();
                 }else{
                     $nombre = $datospersona->obtenerPersonaPorNroCedulaResponse->return->nombres;
@@ -212,6 +214,32 @@ class HomeController extends Controller
             $question->text_value = $data['q'.$i.'_text'];
             $question->save();
         }
+
+        /*$this->validate($request, [
+    		//'title' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);*/
+
+        $input['image'] = 'cedula-'.$request->ci.'.'.$request->image->getClientOriginalExtension();
+        $request->image->move(public_path('images/'.$request->ci), $input['image']);
+        $input['title'] = $request->ci;
+        ImageGallery::create($input);
+
+        if($request->imagepareja){
+        $input['image'] = 'cedula-pareja-'.$request->ci.'.'.$request->imagepareja->getClientOriginalExtension();
+        $request->imagepareja->move(public_path('images/'.$request->ci), $input['image']);
+        $input['title'] = $request->ci;
+        ImageGallery::create($input);
+        }
+
+        if($request->imagecroquis){
+        $input['image'] = 'croquis-'.$request->ci.'.'.$request->imagecroquis->getClientOriginalExtension();
+        $request->imagecroquis->move(public_path('images/'.$request->ci), $input['image']);
+        $input['title'] = $request->ci;
+        ImageGallery::create($input);
+        }
+
+
 
         Session::flash('message', 'Se ha inscripto Correctamente!');
         return redirect()->route('inicio');

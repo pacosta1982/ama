@@ -38,7 +38,7 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-            <form action="/formulario" method="post">
+            <form action="/formulario" method="post" enctype="multipart/form-data">
                 @csrf
                 @include('postulante')
                 </div>
