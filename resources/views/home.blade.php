@@ -10,6 +10,7 @@
 
 @section('content')
 <div class="container">
+
     <div class="stepwizard">
         <div class="stepwizard-row setup-panel">
             <div class="stepwizard-step col-xs-3">
@@ -38,7 +39,7 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-            <form action="/formulario" method="post" enctype="multipart/form-data">
+            <form action="/formulario" method="post" id="my-form" enctype="multipart/form-data" xl-form>
                 @csrf
                 @include('postulante')
                 </div>
@@ -69,40 +70,9 @@
                 </div>
                 <div class="panel-body">
                     @include('adjuntos')
-                    <button class="btn btn-success pull-right" type="submit">Enviar!</button>
+                    <button class="btn btn-success pull-right" id="sendmemessage" type="submit">Enviar!</button>
                 </div>
             </div>
-
-    <!--    <div class="panel panel-primary setup-content" id="step-2">
-            <div class="panel-heading">
-                 <h3 class="panel-title">Miembros</h3>
-            </div>
-            <div class="panel-body">
-                @include('miembros')
-                <button class="btn btn-primary nextBtn pull-right" type="button">Siguiente</button>
-            </div>
-        </div>
-
-        <div class="panel panel-primary setup-content" id="step-3">
-            <div class="panel-heading">
-                 <h3 class="panel-title">Cuestionario</h3>
-            </div>
-            <div class="panel-body">
-                @include('cuestionario')
-                <button class="btn btn-primary nextBtn pull-right" type="button">Siguiente</button>
-            </div>
-        </div>
-
-        <div class="panel panel-primary setup-content" id="step-4">
-            <div class="panel-heading">
-                 <h3 class="panel-title">Adjuntos</h3>
-            </div>
-            <div class="panel-body">
-                @include('adjuntos')
-                <button class="btn btn-success pull-right" type="submit">Enviar!</button>
-            </div>
-        </div> -->
-
     </form>
 </div>
 
@@ -131,20 +101,19 @@
                     </div>
                     <div class="form-group col-sm-6">
                     <label for="">Telefono</label>
-                    <input type="text" class="form-control" name="ocupacion" id="ocupacion" placeholder="Ingrese Telefono">
+                    <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Ingrese Telefono">
                     </div>
                   </div>
                   <div class="row">
                         <div class="form-group col-sm-6">
                         <label for="">Correo</label>
-                        <input type="text" class="form-control" name="ocupacion" id="ocupacion" placeholder="Ingrese Correo">
+                        <input type="text" class="form-control" name="emailmiembro" id="emailmiembro" placeholder="Ingrese Correo">
                         </div>
                         <div class="form-group col-sm-6">
                             <label>Parentesco</label>
-                            <select class="form-control required" name="parentesco_id" id="parentesco_id">
+                            <select class="form-control required" name="parentesco_idmiembro" id="parentesco_idmiembro">
                                 <option value="" >Seleccione una opcion</option>
                                 @foreach($parentesco as $us)
-
                                 <option value="{{$us->id}}"
                                 >{{$us->name}} </option>
                                 @endforeach
@@ -155,7 +124,7 @@
                   <div class="row">
                         <div class="form-group col-sm-6">
                                 <label>Discapacidad:</label>
-                                <select class="form-control required" name="discapacidad" id="discapacidad">
+                                <select class="form-control required" name="discapacidadmiembro" id="discapacidadmiembro">
                                     <option value="" >Seleccione una opcion</option>
                                     @foreach($discapacidad as $us)
 
@@ -167,7 +136,7 @@
 
                             <div class="form-group col-sm-6">
                                 <label>Enfermedad:</label>
-                                <select class="form-control required" name="enfermedad_id" id="enfermedad_id">
+                                <select class="form-control required" name="enfermedad_idmiembro" id="enfermedad_idmiembro">
                                     <option value="" >Seleccione una opcion</option>
                                     @foreach($enfermedad as $en)
 
@@ -192,14 +161,10 @@
                         </div>
                         <div class="form-group col-sm-6">
                         <label for="">Ingreso Mensual</label>
-                        <input type="text" class="form-control" name="ingreso" id="ingreso" placeholder="Ingrese Ocupación">
+                        <input type="text" class="form-control" name="ingresomiembro" id="ingresomiembro" placeholder="Ingrese Ingreso Mensual">
                         <span id="error_first_ingreso" class="text-danger"></span>
                         </div>
-
                   </div>
-
-
-
               </div>
                 <div class="modal-footer">
                 <input type="button" class="btn " name="save" id="save"  value="Aceptar"/>
@@ -223,6 +188,12 @@
 /*@import url('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css');*/
  body {
 
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6;
 }
 .stepwizard-step p {
     margin-top: 0px;
@@ -277,6 +248,8 @@
 
     $("#nroexp").numeric({ decimal: false });
     $("#ingreso").numeric({ decimal: false });
+    $("#ingresomiembro").numeric({ decimal: false });
+
 
     </script>
     <script> console.log('Hi!');
@@ -290,11 +263,40 @@
         var first_name = 'Piter';
         var last_name = 'Acosta';
 
+        var jsonStr = '{"miembros":[]}';
+        var obj = JSON.parse(jsonStr);
+
+        function getSelectedText(elementId) {
+            var elt = document.getElementById(elementId);
+
+            if (elt.selectedIndex == -1)
+                return null;
+
+            return elt.options[elt.selectedIndex].text;
+        }
         //alert('funciona');
         $('#save').click(function(){
             //alert('funciona');
+            function getSelectedText(elementId) {
+    var elt = document.getElementById(elementId);
+
+    if (elt.selectedIndex == -1)
+        return null;
+
+    return elt.options[elt.selectedIndex].text;
+}
+
             var cedula = $('#cedulamiembro').val();
             var ocupacion = $('#ocupacion').val();
+            var parentesco = $('#parentesco_idmiembro').val();
+            var escolaridad = $('#institucion_id').val();
+            var ingreso = $('#ingresomiembro').val();
+            var telefono = $('#telefono').val();
+            var correo = $('#emailmiembro').val();
+            var parentesco_text = getSelectedText('parentesco_idmiembro');
+            var escolaridad_text = getSelectedText('institucion_id');
+            var enfermedad = getSelectedText('enfermedad_idmiembro');
+            var discapacidad = getSelectedText('discapacidadmiembro');
             var error_first_name = '';
             var error_first_ocupacion = '';
 
@@ -343,40 +345,39 @@
             first_name_institucion_id = $('#institucion_id').val();
             }
 
-
-
-            if($('#parentesco_id').val() == '')
+            if($('#parentesco_idmiembro').val() == '')
             {
             error_first_parentesco_id = 'Parentesco Requerido';
             $('#error_first_parentesco_id').text(error_first_parentesco_id);
-            $('#parentesco_id').css('border-color', '#cc0000');
+            $('#parentesco_idmiembro').css('border-color', '#cc0000');
             first_name_parentesco_id = '';
             }
             else
             {
             error_first_parentesco_id = '';
             $('#error_first_parentesco_id').text(error_first_parentesco_id);
-            $('#parentesco_id').css('border-color', '');
-            first_name_parentesco_id = $('#parentesco_id').val();
+            $('#parentesco_idmiembro').css('border-color', '');
+            first_name_parentesco_id = $('#parentesco_idmiembro').val();
             }
 
-            if($('#ingreso').val() == '')
+            if($('#ingresomiembro').val() == '')
             {
-                error_first_ingreso = 'Ingreso Requerido';
+            error_first_ingreso = 'Ingreso Requerido';
             $('#error_first_ingreso').text(error_first_ingreso);
-            $('#ingreso').css('border-color', '#cc0000');
+            $('#ingresomiembro').css('border-color', '#cc0000');
             first_name_ingreso = '';
             }
             else
             {
-                error_first_ingreso = '';
+            error_first_ingreso = '';
             $('#error_first_ingreso').text(error_first_ingreso);
-            $('#ingreso').css('border-color', '');
-            first_name_ingreso = $('#ingreso').val();
+            $('#ingresomiembro').css('border-color', '');
+            first_name_ingreso = $('#ingresomiembro').val();
             }
 
 
 
+            if($('#cedulamiembro').val() != '' &&  $('#ocupacion').val() != '' && $('#institucion_id').val() != '' && $('#parentesco_idmiembro').val() != '' && $('#ingresomiembro').val() != ''){
 
 
             $.ajax({
@@ -387,27 +388,70 @@
 
                         //alert(data.cedula);
                         count = count + 1;
+                        //output = '<input type="text" name="cedulamiembro" value="abc">'
                         output = '<tr id="row_'+count+'">';
-                        output += '<td>'+data.cedula+' <input type="hidden" name="hidden_first_name[]" id="first_name'+count+'" class="first_name" value="'+first_name+'" /></td>';
+                        output += '<td>'+data.cedula+' <input type="hidden" name="hidden_first_name[]" id="cedulamiembro'+count+'" class="first_name" value="'+first_name+'" /></td>';
                         output += '<td>'+data.nombres+' '+data.apellido+' <input type="hidden" name="hidden_last_name[]" id="last_name'+count+'" value="'+last_name+'" /></td>';
-                        output += '<td>'+first_name+' <input type="hidden" name="hidden_first_name[]" id="first_name'+count+'" class="first_name" value="'+first_name+'" /></td>';
+                        output += '<td>'+parentesco_text+' <input type="hidden" name="hidden_first_name[]" id="first_name'+count+'" class="first_name" value="'+parentesco+'" /></td>';
                         output += '<td>'+data.sexo+' <input type="hidden" name="hidden_last_name[]" id="last_name'+count+'" value="'+last_name+'" /></td>';
-                        output += '<td>'+first_name+' <input type="hidden" name="hidden_first_name[]" id="first_name'+count+'" class="first_name" value="'+first_name+'" /></td>';
+                        output += '<td>'+escolaridad_text+' <input type="hidden" name="hidden_first_name[]" id="escolaridad'+count+'" class="first_name" value="'+escolaridad+'" /></td>';
                         output += '<td>'+ocupacion+' <input type="hidden" name="hidden_last_name[]" id="last_name'+count+'" value="'+last_name+'" /></td>';
-                        output += '<td><button type="button" name="remove_details" class="btn btn-danger btn-xs remove_details" id="'+count+'">Remove</button></td>';
+                        output += '<td><button type="button" name="remove_details" class="btn btn-danger btn-xs remove_details" id="'+count+'">Eliminar</button></td>';
                         output += '</tr>';
+                        //jsonObj.miembros['cedula'] = data.cedula;
+                        obj['miembros'].push({"id":count,"cedula":data.cedula,"nombre":data.nombres,"apellido":data.nombres,"parentesco":parentesco_text,
+                                                "sexo":data.sexo,"escolaridad":escolaridad_text,"ocupacion":ocupacion,"ingreso":ingreso,
+                                                "correo":correo,"telefono":telefono,"enfermedad":enfermedad,"discapacidad":discapacidad});
+                        jsonStr = JSON.stringify(obj);
+
+
                         $('#user_data').append(output);
+                        document.getElementById("datosmiembros").value = jsonStr;
                         $('#myModal').modal('toggle');
+
+                        $('#cedulamiembro').val('');
+                        $('#ocupacion').val('');
+                        $('#institucion_id').val('');
+
+                        $('#institucion_id').val('');
+                        $('#parentesco_idmiembro').val('');
+                        $('#ingresomiembro').val('');
+
+                        $('#telefono').val('');
+                        $('#emailmiembro').val('');
+                        $('#discapacidadmiembro').val('');
+
+                        $('#enfermedad_idmiembro').val('');
+
                     }
                 });
+            }
 
+        });
+
+        $("#sendmemessage").submit(function(stay){
+        var formdata = $(this).serialize(); // here $(this) refere to the form its submitting
+            $.ajax({
+                type: 'POST',
+                url: "{{ url('/formulario') }}",
+                data: formdata, // here $(this) refers to the ajax object not form
+                success: function (data) {
+                alert(data);
+                },
+            });
+            stay.preventDefault();
         });
 
         $(document).on('click', '.remove_details', function(){
         var row_id = $(this).attr("id");
-        if(confirm("Are you sure you want to remove this row data?"))
+        if(confirm("Esta seguro que quiere eliminar los datos?"))
         {
         $('#row_'+row_id+'').remove();
+        delete obj['miembros'][row_id];
+        jsonStr = JSON.stringify(obj);
+        console.log(jsonStr);
+        //jsonStr.delete[row_id];
+        //console.log(jsonStr);
         }
         else
         {

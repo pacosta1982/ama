@@ -175,6 +175,8 @@ class HomeController extends Controller
         $persona->embarazo=$request->embarazo;
         $persona->gestacion=$request->gestacion;
 
+        $persona->miembros=$request->datosmiembros;
+
         $persona->save();
 
         $addmiembro = new Persona_Parentesco();
@@ -215,10 +217,6 @@ class HomeController extends Controller
             $question->save();
         }
 
-        /*$this->validate($request, [
-    		//'title' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);*/
 
         $input['image'] = 'cedula-'.$request->ci.'.'.$request->image->getClientOriginalExtension();
         $request->image->move(public_path('images/'.$request->ci), $input['image']);
@@ -243,6 +241,8 @@ class HomeController extends Controller
 
         Session::flash('message', 'Se ha inscripto Correctamente!');
         return redirect()->route('inicio');
+        //var_dump($request->all());
+        //return "hola";
 
     }
 

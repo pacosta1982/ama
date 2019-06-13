@@ -23,3 +23,4 @@
 
     </tbody>
 </table>
+<textarea  class="form-control" id="datosmiembros" style="display:none;" name="datosmiembros" rows="3" placeholder="Enter ..."></textarea>
