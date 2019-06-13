@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => 'AMA',
+    'logo' => '',
 
     'logo_mini' => '<b>A</b>LT',
 

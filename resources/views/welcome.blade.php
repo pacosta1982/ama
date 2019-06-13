@@ -16,6 +16,7 @@
         @if(Session::has('error'))
         <p class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('error') }}</p>
         @endif
+        <h2>Formulario de Inscripción AMA</h2>
     <form action="/filtros" method="post">
         @csrf
     <div class="row no-print">
