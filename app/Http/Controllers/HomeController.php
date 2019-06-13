@@ -217,12 +217,12 @@ class HomeController extends Controller
             $question->save();
         }
 
-
+        if($request->image){
         $input['image'] = 'cedula-'.$request->ci.'.'.$request->image->getClientOriginalExtension();
         $request->image->move(public_path('images/'.$request->ci), $input['image']);
         $input['title'] = $request->ci;
         ImageGallery::create($input);
-
+        }
         if($request->imagepareja){
         $input['image'] = 'cedula-pareja-'.$request->ci.'.'.$request->imagepareja->getClientOriginalExtension();
         $request->imagepareja->move(public_path('images/'.$request->ci), $input['image']);

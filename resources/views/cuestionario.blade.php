@@ -8,15 +8,17 @@
                 <div class="col-md-2">
                 <div class="radio">
                     <label>
-                        <input type="radio" name="q4" id="q4" value="t" checked="">
+                        <div class="form-group">
+                        <input type="radio" name="q4" id="q4" value="t" required>
                         Si
+                        </div>
                     </label>
                     </div>
                 </div>
                 <div class="col-md-2">
                 <div class="radio">
                     <label>
-                        <input type="radio" name="q4" id="q4" value="f">
+                        <input type="radio" name="q4" id="q4" value="f" required>
                         No
                     </label>
                     </div>
@@ -39,7 +41,7 @@
                     <div class="col-md-2">
                             <div class="radio">
                                     <label>
-                                        <input type="radio" name="q5" id="q5" value="t" checked="">
+                                        <input type="radio" name="q5" id="q5" value="t"  required>
                                         Si
                                     </label>
                                     </div>
@@ -47,7 +49,7 @@
                     <div class="col-md-2">
                             <div class="radio">
                                     <label>
-                                        <input type="radio" name="q5" id="q5" value="f">
+                                        <input type="radio" name="q5" id="q5" value="f" required>
                                         No
                                     </label>
                                     </div>
@@ -70,7 +72,7 @@
                         <div class="col-md-2">
                         <div class="radio">
                         <label>
-                            <input type="radio" name="q6" id="q6" value="t" checked="">
+                            <input type="radio" name="q6" id="q6" value="t" required>
                             Si
                         </label>
                         </div>
@@ -78,7 +80,7 @@
                         <div class="col-md-2">
                             <div class="radio">
                                     <label>
-                                        <input type="radio" name="q6" id="q6" value="f">
+                                        <input type="radio" name="q6" id="q6" value="f" required>
                                         No
                                     </label>
                             </div>
@@ -100,7 +102,7 @@
                             <div class="col-md-2">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="q7" id="q7" value="t" checked="">
+                                    <input type="radio" name="q7" id="q7" value="t" required>
                                     Si
                                 </label>
                                 </div>
@@ -108,7 +110,7 @@
                             <div class="col-md-2">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="q7" id="q7" value="f">
+                                    <input type="radio" name="q7" id="q7" value="f"required>
                                     No
                                 </label>
                                 </div>
@@ -131,7 +133,7 @@
                                 <div class="col-md-2">
                                         <div class="radio">
                                                 <label>
-                                                    <input type="radio" name="q8" id="q8" value="t" checked="">
+                                                    <input type="radio" name="q8" id="q8" value="t" required>
                                                     Si
                                                 </label>
                                                 </div>
@@ -139,7 +141,7 @@
                                 <div class="col-md-2">
                                         <div class="radio">
                                                 <label>
-                                                    <input type="radio" name="q8" id="q8" value="f">
+                                                    <input type="radio" name="q8" id="q8" value="f" required>
                                                     No
                                                 </label>
                                                 </div>
@@ -162,7 +164,7 @@
                                     <div class="col-md-2">
                                     <div class="radio">
                                     <label>
-                                        <input type="radio" name="q9" id="q9" value="t" checked="">
+                                        <input type="radio" name="q9" id="q9" value="t" required>
                                         Si
                                     </label>
                                     </div>
@@ -170,7 +172,7 @@
                                     <div class="col-md-2">
                                     <div class="radio">
                                     <label>
-                                        <input type="radio" name="q9" id="q9" value="f">
+                                        <input type="radio" name="q9" id="q9" value="f" required>
                                         No
                                     </label>
                                     </div>
@@ -193,7 +195,7 @@
                                         <div class="col-md-2">
                                         <div class="radio">
                                         <label>
-                                            <input type="radio" name="q10" id="q10" value="t" checked="">
+                                            <input type="radio" name="q10" id="q10" value="t" required>
                                             Si
                                         </label>
                                         </div>
@@ -201,7 +203,7 @@
                                         <div class="col-md-2">
                                             <div class="radio">
                                                     <label>
-                                                        <input type="radio" name="q10" id="q10" value="f">
+                                                        <input type="radio" name="q10" id="q10" value="f" required>
                                                         No
                                                     </label>
                                                     </div>
@@ -224,7 +226,7 @@
                                             <div class="col-md-2">
                                             <div class="radio">
                                             <label>
-                                                <input type="radio" name="q11" id="q11" value="t" checked="">
+                                                <input type="radio" name="q11" id="q11" value="t" required>
                                                 Si
                                             </label>
                                             </div>
@@ -232,7 +234,7 @@
                                             <div class="col-md-2">
                                                 <div class="radio">
                                                         <label>
-                                                            <input type="radio" name="q11" id="q11" value="f">
+                                                            <input type="radio" name="q11" id="q11" value="f" required>
                                                             No
                                                         </label>
                                                         </div>
@@ -240,7 +242,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                            <select class="form-control required" name="q11_text" id="q11_text">
+                                            <select class="form-control required" name="q11_text" id="q11_text" >
                                                     <option value="" >Seleccione una opcion</option>
                                                     @foreach($entidades as $ent)
 

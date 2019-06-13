@@ -2,7 +2,7 @@
         <div class="col-md-6">
                 <div class="form-group">
                     <label>Adjunte Cedula del Postulante</label>
-                    <input type="file" name="image" required>
+                    <input type="file" name="image" >
                 </div>
             </div>
 </div>

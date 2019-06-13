@@ -61,7 +61,7 @@
             </div>
             <div class="panel-body">
                 @include('cuestionario')
-                <button class="btn btn-primary nextBtn pull-right" type="button">Siguiente</button>
+                <button class="btn btn-primary nextBtn cuestionario pull-right" type="button">Siguiente</button>
             </div>
         </div>
         <div class="panel panel-primary setup-content" id="step-4">
@@ -429,18 +429,7 @@
 
         });
 
-        $("#sendmemessage").submit(function(stay){
-        var formdata = $(this).serialize(); // here $(this) refere to the form its submitting
-            $.ajax({
-                type: 'POST',
-                url: "{{ url('/formulario') }}",
-                data: formdata, // here $(this) refers to the ajax object not form
-                success: function (data) {
-                alert(data);
-                },
-            });
-            stay.preventDefault();
-        });
+
 
         $(document).on('click', '.remove_details', function(){
         var row_id = $(this).attr("id");
@@ -483,7 +472,7 @@ allNextBtn.click(function () {
     var curStep = $(this).closest(".setup-content"),
         curStepBtn = curStep.attr("id"),
         nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-        curInputs = curStep.find("input[type='text'],input[type='url']"),
+        curInputs = curStep.find("input[type='text'],input[type='url'],input[type='radio']"),
         isValid = true;
 
     $(".form-group").removeClass("has-error");
