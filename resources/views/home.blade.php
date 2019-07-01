@@ -291,12 +291,13 @@
             var parentesco = $('#parentesco_idmiembro').val();
             var escolaridad = $('#institucion_id').val();
             var ingreso = $('#ingresomiembro').val();
-            var telefono = $('#telefono').val();
+            var telefono = $('#telefono').val(); 
             var correo = $('#emailmiembro').val();
             var parentesco_text = getSelectedText('parentesco_idmiembro');
             var escolaridad_text = getSelectedText('institucion_id');
             var enfermedad = getSelectedText('enfermedad_idmiembro');
             var discapacidad = getSelectedText('discapacidadmiembro');
+            //var fechanacim = $('#fechanacim').val(); 
             var error_first_name = '';
             var error_first_ocupacion = '';
 
@@ -401,7 +402,7 @@
                         //jsonObj.miembros['cedula'] = data.cedula;
                         obj['miembros'].push({"id":count,"cedula":data.cedula,"nombre":data.nombres,"apellido":data.apellido,"parentesco":parentesco_text,
                                                 "sexo":data.sexo,"escolaridad":escolaridad_text,"ocupacion":ocupacion,"ingreso":ingreso,
-                                                "correo":correo,"telefono":telefono,"enfermedad":enfermedad,"discapacidad":discapacidad});
+                                                "correo":correo,"telefono":telefono,"enfermedad":enfermedad,"discapacidad":discapacidad,"fechanacim":data.fechNacim});
                         jsonStr = JSON.stringify(obj);
 
 
