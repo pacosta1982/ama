@@ -399,7 +399,7 @@
                         output += '<td><button type="button" name="remove_details" class="btn btn-danger btn-xs remove_details" id="'+count+'">Eliminar</button></td>';
                         output += '</tr>';
                         //jsonObj.miembros['cedula'] = data.cedula;
-                        obj['miembros'].push({"id":count,"cedula":data.cedula,"nombre":data.nombres,"apellido":data.nombres,"parentesco":parentesco_text,
+                        obj['miembros'].push({"id":count,"cedula":data.cedula,"nombre":data.nombres,"apellido":data.apellido,"parentesco":parentesco_text,
                                                 "sexo":data.sexo,"escolaridad":escolaridad_text,"ocupacion":ocupacion,"ingreso":ingreso,
                                                 "correo":correo,"telefono":telefono,"enfermedad":enfermedad,"discapacidad":discapacidad});
                         jsonStr = JSON.stringify(obj);
