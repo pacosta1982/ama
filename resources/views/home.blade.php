@@ -473,14 +473,24 @@ allNextBtn.click(function () {
     var curStep = $(this).closest(".setup-content"),
         curStepBtn = curStep.attr("id"),
         nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-        curInputs = curStep.find("input[type='text'],input[type='url'],input[type='radio'],select"),
+        curInputs = curStep.find("input[type='text'],input[type='url'],input[type='radio'],select,textarea"),
         isValid = true;
 
     $(".form-group").removeClass("has-error");
+    var miembroschk = $('#error_miembros').val();
+    $('#error_miembros').css('border-color', '');
+    $('#error_miembros').text('');
+
     for (var i = 0; i < curInputs.length; i++) {
         if (!curInputs[i].validity.valid) {
             isValid = false;
             $(curInputs[i]).closest(".form-group").addClass("has-error");
+            if (!miembroschk) {
+                $('#error_miembros').text('Debe Ingresar al menos un miembro');
+                $('#error_miembros').css('border-color', '#cc0000');
+            }
+            //$('#error_miembros').text('Debe Ingresar al menos un miembro');
+            //$('#error_miembros').css('border-color', '#cc0000');
         }
     }
 

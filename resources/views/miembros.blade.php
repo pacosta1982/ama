@@ -23,4 +23,7 @@
 
     </tbody>
 </table>
-<textarea  class="form-control" id="datosmiembros" style="display:none;" name="datosmiembros" rows="3" placeholder="Enter ..."></textarea>
+<span id="error_miembros" class="text-danger"></span>
+<div class="form-group">
+<textarea  class="form-control"  required  id="datosmiembros" style="display:none;" name="datosmiembros" rows="3" placeholder="Enter ..."></textarea>
+</div>
