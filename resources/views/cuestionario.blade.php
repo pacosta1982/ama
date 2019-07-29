@@ -242,7 +242,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                            <select class="form-control required" name="q11_text" id="q11_text" >
+                                            <select class="form-control required" name="q11_text" id="q11_text"required >
                                                     <option value="" >Seleccione una opcion</option>
                                                     @foreach($entidades as $ent)
 
